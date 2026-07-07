@@ -120,7 +120,7 @@ def main(page: ft.Page):
         page.vertical_alignment = ft.MainAxisAlignment.START
         
         
-        gestor_catalogos = GestorCatalogos(persistencia)
+        gestor_catalogos = GestorCatalogos(gestor_datos)
 
 
         def mostrar_pantalla_catalogo(titulo_vista, tipo_catalogo):
@@ -177,7 +177,6 @@ def main(page: ft.Page):
             page.update()
 
 
-        # --- CÓDIGO ORIGINAL DEL MENÚ ACTUALIZADO CON LOS ENLACES (on_click) ---
         page.add(
             ft.Container(
                 content=ft.Column([

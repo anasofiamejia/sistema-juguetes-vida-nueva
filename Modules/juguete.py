@@ -27,7 +27,7 @@ class Juguete:
             ancho_cm=datos.get("ancho_cm", 0.0),
             largo_cm=datos.get("largo_cm", 0.0),
             usa_baterias=datos.get("usa_baterias", False),
-            include=datos.get("incluye", "n/a"),
+            incluye=datos.get("incluye", "n/a"),
             estado_fisico=datos.get("estado_fisico", "bueno"),
             piezas_faltantes=datos.get("piezas_faltantes", False),
             triaje_resultado=datos.get("triaje_resultado"),
