@@ -1,0 +1,32 @@
+[
+  {
+    "correo": "admin@vidanueva.org",
+    "contrasena": "admin123",
+    "nombre": "Director General",
+    "rol": "Administrador"
+  },
+  {
+    "correo": "juan.voluntario@vidanueva.org",
+    "contrasena": "voluntario123",
+    "nombre": "Juan Pérez",
+    "rol": "Operario"
+  },
+  {
+    "correo": "ana.cliente@gmail.com",
+    "contrasena": "cliente123",
+    "nombre": "Ana Gómez",
+    "rol": "Familia"
+  },
+  {
+    "correo": "contacto@fundacionninos.org",
+    "contrasena": "aliado123",
+    "nombre": "Fundación Niños Felices",
+    "rol": "Fundación"
+  },
+  {
+    "correo": "reciclaje@escueladereciclaje.edu",
+    "contrasena": "verde123",
+    "nombre": "Escuela de Reciclaje",
+    "rol": "Centro_Reciclaje"
+  }
+]
