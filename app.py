@@ -147,7 +147,7 @@ def main(page: ft.Page):
             # Contenedor donde se renderizará la información
             zona_render = ft.Column(spacing=15, scroll=ft.ScrollMode.AUTO, expand=True)
 
-            # Solicitamos la colección de objetos Juguete al Gestor y los enviamos al Componente Visual
+        
             if tipo_catalogo == "comercial":
                 lista_juguetes = gestor_catalogos.obtener_catalogo_comercial()
                 # Creamos una fila/malla para tarjetas
@@ -212,7 +212,7 @@ def main(page: ft.Page):
                     style=ft.ButtonStyle(bgcolor="#4DD0E1"),
                     on_click=lambda _: mostrar_pantalla_catalogo("Catálogo de Donaciones", "social")
                 ),
-                # Conectamos este al comercial por si quieren comprar
+                
                 ft.ElevatedButton(
                     content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
                     width=350, 
