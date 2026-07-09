@@ -7,31 +7,43 @@ from vista_catalogos import ComponenteCatalogos
 
 def main(page: ft.Page):
 
-    # Ventana Principal de Flet
+    
+    # Ventana principal:
+
     page.title = "JUGUETES VIDA NUEVA"
     page.window_width = 500
-    page.window_height = 650
+    page.window_height = 760
     page.theme_mode = ft.ThemeMode.LIGHT
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment = ft.MainAxisAlignment.START
-
+    page.vertical_alignment = ft.MainAxisAlignment.SPACE_BETWEEN
+    page.padding = 0
     page.bgcolor = "white"
 
+   
     gestor_usuarios = SistemaUsuarios()
     gestor_datos = AdministradorPersistencia()
 
+    
+    # Componenetes visuales del login:
+    
     container_logo = ft.Image(
-    src="logo.png",         
-    width=130,
-    height=130,
+        src="logo.png",         
+        width=200,
+        height=200,
+        fit="contain"
+    )
+
+    container_logo_con_margen = ft.Container(
+        content=container_logo,
+        margin=ft.Padding(0, 20, 0, 0) 
     )
 
     txt_correo = ft.TextField(
         label="Correo Electrónico", 
         width=380, 
-        border_color="#4DD0E1", 
+        border_color="grey400", 
         label_style=ft.TextStyle(color="bluegrey700"),
-        prefix_icon="email"
+        prefix_icon="email" 
     )
     
     txt_contrasena = ft.TextField(
@@ -39,9 +51,9 @@ def main(page: ft.Page):
         password=True, 
         can_reveal_password=True, 
         width=380, 
-        border_color = "#4DD0E1", 
+        border_color="grey400", 
         label_style=ft.TextStyle(color="bluegrey700"),
-        prefix_icon="lock"
+        prefix_icon="lock" 
     )
     
     lbl_mensaje_error = ft.Text(
@@ -51,8 +63,7 @@ def main(page: ft.Page):
         weight=ft.FontWeight.W_500
     )
 
-    # Lógica y Autenticación:
-
+    # Lógica al activar el Login:
     def desencadenar_login(e):
         usuario_activo = gestor_usuarios.autenticar(txt_correo.value, txt_contrasena.value)
         if usuario_activo:
@@ -63,70 +74,68 @@ def main(page: ft.Page):
             page.update()
 
     btn_login = ft.ElevatedButton(
-        content=ft.Text("Iniciar Sesión", color="white", weight=ft.FontWeight.BOLD),
+        content=ft.Text("Iniciar Sesión", color="white", weight=ft.FontWeight.BOLD, size=16),
         width=380,
+        height=48,
         on_click=desencadenar_login,
         style=ft.ButtonStyle(
             bgcolor="#4DD0E1",
-            shape=ft.RoundedRectangleBorder(radius=8),
+            shape=ft.RoundedRectangleBorder(radius=6),
         )
     )
 
-    # Diseño parte inferior:
+    # Componentes parte inferior del Login:
+    linea_decorativa = ft.Container(height=3, bgcolor="#4DD0E1")
 
-    linea_decorativa = ft.Divider(height=2, color="#4DD0E1")
-
-    # Barra de enlaces:
     columna_izquierda = ft.Column([
-    ft.Row([
-        ft.Icon("info", color="#4DD0E1", size=16), 
-        ft.Text("REPORTE DE IMPACTO", size=11, weight=ft.FontWeight.BOLD, color="white")
-    ]),
-    ft.Text("  SOPORTE TÉCNICO", size=11, weight=ft.FontWeight.BOLD, color="white"),
-], spacing=6, horizontal_alignment=ft.CrossAxisAlignment.START)
+        ft.Row([
+            ft.Icon("info", color="#0F4C5C", size=16), 
+            ft.Text("REPORTE DE IMPACTO", size=11, weight=ft.FontWeight.BOLD, color="white")
+        ], spacing=5),
+        ft.Container(
+            padding=ft.Padding(21, 2, 0, 2),
+            content=ft.Text("   SOPORTE TÉCNICO", size=11, weight=ft.FontWeight.BOLD, color="bluegrey200")
+        ),
+    ], spacing=4, horizontal_alignment=ft.CrossAxisAlignment.START)
 
     columna_derecha = ft.Column([
-    ft.Text("REGISTRARSE (SOLO CLIENTES)", size=11, weight=ft.FontWeight.W_500, color="white", text_align=ft.TextAlign.RIGHT),
-    ft.Text("RECOBRAR ACCESO (CONTRASEÑA)", size=11, weight=ft.FontWeight.W_500, color="white", text_align=ft.TextAlign.RIGHT),
-], spacing=6, horizontal_alignment=ft.CrossAxisAlignment.END)
+        ft.Text("REGISTRARSE (SOLO CLIENTES)", size=11, weight=ft.FontWeight.W_500, color="white", text_align=ft.TextAlign.RIGHT),
+        ft.Text("RECOBRAR ACCESO (CONTRASEÑA)", size=11, weight=ft.FontWeight.W_500, color="white", text_align=ft.TextAlign.RIGHT),
+    ], spacing=6, horizontal_alignment=ft.Alignment(0, 0)
+    ) 
 
-    # Contenedor de enlaces:
     contenedor_enlaces = ft.Container(
-    content=ft.Row(
-        controls=[columna_izquierda, columna_derecha],
-        alignment=ft.MainAxisAlignment.SPACE_BETWEEN
-    ),
-    bgcolor="#0F4C5C", 
-    padding=ft.padding.Padding(15, 12, 22, 12), # Un toque extra a la derecha
-)
+        content=ft.Row(
+            controls=[columna_izquierda, columna_derecha],
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+        ),
+        bgcolor="#4DD0E1", 
+        padding=15, 
+        height=68
+    )
 
-    # Barra de estado inferior:
     barra_estado = ft.Container(
         content=ft.Text(
             "SESIÓN ACTUAL: VISITANTE", 
-            size=11, 
-            weight=ft.FontWeight.BOLD,
-            color="bluegrey700",
-            text_align=ft.TextAlign.CENTER
+            
         ),
-        bgcolor="grey200",
+        bgcolor="white",
         padding=8,
-        width=500
+        alignment=ft.Alignment(0, 0)  
     )
 
-    # Menú por Perfiles de Usuario (Lógica Interna):
+    
+    # Lógica de Menús y Cátalogos:
+
     def renderizar_menu_por_rol(usuario):
         page.controls.clear() 
         page.vertical_alignment = ft.MainAxisAlignment.START
         
-        
         gestor_catalogos = GestorCatalogos(gestor_datos)
-
 
         def mostrar_pantalla_catalogo(titulo_vista, tipo_catalogo):
             page.controls.clear()
             
-            # Encabezado del catálogo
             page.add(
                 ft.Container(
                     content=ft.Column([
@@ -135,7 +144,7 @@ def main(page: ft.Page):
                             ft.IconButton(
                                 icon=ft.icons.ARROW_BACK, 
                                 tooltip="Volver al Menú", 
-                                on_click=lambda _: renderizar_menu_por_rol(usuario) # POO: Regresa pasando el estado del usuario activo
+                                on_click=lambda _: renderizar_menu_por_rol(usuario)
                             )
                         ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                     ]),
@@ -144,13 +153,11 @@ def main(page: ft.Page):
                 ft.Divider(height=1, color="grey300")
             )
 
-            # Contenedor donde se renderizará la información
             zona_render = ft.Column(spacing=15, scroll=ft.ScrollMode.AUTO, expand=True)
+            lista_juguetes = []
 
-        
             if tipo_catalogo == "comercial":
                 lista_juguetes = gestor_catalogos.obtener_catalogo_comercial()
-                # Creamos una fila/malla para tarjetas
                 malla = ft.Row(wrap=True, spacing=15, run_spacing=15)
                 for j in lista_juguetes:
                     malla.controls.append(ComponenteCatalogos.crear_tarjeta_comercial_social(j))
@@ -165,18 +172,16 @@ def main(page: ft.Page):
 
             elif tipo_catalogo == "residuos":
                 lista_juguetes = gestor_catalogos.obtener_catalogo_residuos()
-                # Para residuos usamos el método estático de la DataTable técnica
                 tabla = ComponenteCatalogos.crear_tabla_residuos(lista_juguetes)
-                zona_render.controls.append(ft.Row([tabla], scroll=ft.ScrollMode.AUTO)) # Scroll horizontal si es necesario
+                zona_render.controls.append(ft.Row([tabla], scroll=ft.ScrollMode.AUTO))
 
-            # Mensaje por si la lista está vacía
             if not lista_juguetes:
                 zona_render.controls.append(ft.Text("No hay registros en este catálogo actualmente.", italic=True, color="bluegrey400"))
 
             page.add(ft.Container(content=zona_render, padding=20, expand=True))
             page.update()
 
-
+        # Diseño del menú al iniciar sesión:
         page.add(
             ft.Container(
                 content=ft.Column([
@@ -194,39 +199,31 @@ def main(page: ft.Page):
 
         if usuario.rol == "Familia":
             bloque_acciones.controls.extend([
-                # Conectamos el botón al catálogo comercial
                 ft.ElevatedButton(
                     content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
-                    width=350, 
-                    style=ft.ButtonStyle(bgcolor="#4DD0E1"),
+                    width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"),
                     on_click=lambda _: mostrar_pantalla_catalogo("Catálogo Comercial", "comercial")
                 ),
                 ft.ElevatedButton(content=ft.Text("Registrar una nueva Donación (Donar)", color="white"), width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"))
             ])
         elif usuario.rol == "Fundación":
             bloque_acciones.controls.extend([
-                # Conectamos el botón al catálogo social (Donaciones)
                 ft.ElevatedButton(
                     content=ft.Text("Ver Artículos para Donación (Gratuitos)", color="white"), 
-                    width=350, 
-                    style=ft.ButtonStyle(bgcolor="#4DD0E1"),
+                    width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"),
                     on_click=lambda _: mostrar_pantalla_catalogo("Catálogo de Donaciones", "social")
                 ),
-                
                 ft.ElevatedButton(
                     content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
-                    width=350, 
-                    style=ft.ButtonStyle(bgcolor="#4DD0E1"),
+                    width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"),
                     on_click=lambda _: mostrar_pantalla_catalogo("Catálogo Comercial", "comercial")
                 )
             ])
         elif usuario.rol == "Centro_Reciclaje":
             bloque_acciones.controls.extend([
-                # Conectamos el botón a la tabla técnica de residuos
                 ft.ElevatedButton(
                     content=ft.Text("Ver Inventario de Residuos", color="white"), 
-                    width=350, 
-                    style=ft.ButtonStyle(bgcolor="#4DD0E1"),
+                    width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"),
                     on_click=lambda _: mostrar_pantalla_catalogo("Inventario Técnico de Residuos", "residuos")
                 )
             ])
@@ -238,8 +235,7 @@ def main(page: ft.Page):
         page.add(ft.Container(content=bloque_acciones, padding=30))
         page.update()
 
-
-    # Formulario central:
+    
     formulario_login = ft.Column(
         controls=[
             container_logo,
@@ -251,29 +247,39 @@ def main(page: ft.Page):
             btn_login,
         ],
         spacing=8,
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        alignment=ft.MainAxisAlignment.CENTER 
     )
 
-    # Diseño completo de pantalla:
+    bloque_pie_pagina = ft.Column(
+        controls=[
+            linea_decorativa,
+            contenedor_enlaces,
+            barra_estado
+        ],
+        spacing=0
+    )
+
     diseno_pantalla_completa = ft.Column(
         controls=[
-            formulario_login,
-            ft.Column(
-                controls=[
-                    linea_decorativa,
-                    contenedor_enlaces,
-                    barra_estado
-                ],
-                spacing=0
-            )
+            # Quitamos el alignment="center" problemático de aquí
+            ft.Container(
+                content=formulario_login, 
+                expand=True
+            ),
+            # El pie de página se acopla abajo con su espacio real
+            bloque_pie_pagina
         ],
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-        expand=True
+        expand=True 
     )
 
     page.spacing = 0
     page.padding = 0
 
+    page.window_width = 500
+    page.window_height = 760
+    
     page.add(diseno_pantalla_completa)
 
 if __name__ == "__main__":
