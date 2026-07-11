@@ -16,7 +16,12 @@ class ComponenteCatalogos:
             content=ft.Column([
                 ft.Row([
                     ft.Text(juguete_obj.nombre.upper(), size=14, weight=ft.FontWeight.BOLD, color=texto_color_titulo),
-                    ft.Badge(text=juguete_obj.estado_fisico.upper(), bgcolor=badge_color)
+                    ft.Container(
+    content=ft.Text(juguete_obj.estado_fisico.upper(), size=10, color="white", weight=ft.FontWeight.BOLD),
+    bgcolor=badge_color,
+    padding=6,
+    border_radius=4
+),
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 ft.Text(f"Marca: {juguete_obj.marca} | Categoría: {juguete_obj.categoria}", size=12, color="bluegrey500"),
                 ft.Text(f"Incluye: {juguete_obj.incluye}", size=11, max_lines=2, overflow=ft.TextOverflow.ELLIPSIS, color="bluegrey700"),
@@ -26,7 +31,7 @@ class ComponenteCatalogos:
             bgcolor="white",
             padding=15,
             border_radius=8,
-            border=ft.border.all(1.5, color_borde),
+            border=ft.Border.all(1.5, color_borde),
             width=380
         )
     
@@ -59,6 +64,6 @@ class ComponenteCatalogos:
             columns=columnas,
             rows=filas,
             heading_row_color="grey100",
-            border=ft.border.all(1, "green"), # Borde verde para reciclaje
+            border=ft.Border.all(1, "green"), 
             border_radius=5
         )

@@ -4,6 +4,8 @@ from Modules.persistencia import AdministradorPersistencia
 
 from Modules.catalogos import GestorCatalogos
 from vista_catalogos import ComponenteCatalogos
+from vista_salidas import crear_vista_salidas
+from vista_historial import crear_vista_historial
 
 def main(page: ft.Page):
 
@@ -142,7 +144,7 @@ def main(page: ft.Page):
                         ft.Row([
                             ft.Text(titulo_vista.upper(), size=20, weight=ft.FontWeight.BOLD, color="#0F4C5C"),
                             ft.IconButton(
-                                icon=ft.icons.ARROW_BACK, 
+                                icon="arrow_back", 
                                 tooltip="Volver al Menú", 
                                 on_click=lambda _: renderizar_menu_por_rol(usuario)
                             )
@@ -227,14 +229,31 @@ def main(page: ft.Page):
                     on_click=lambda _: mostrar_pantalla_catalogo("Inventario Técnico de Residuos", "residuos")
                 )
             ])
+
         elif usuario.rol in ["Administrador", "Operario"]:
             bloque_acciones.controls.extend([
-                ft.ElevatedButton(content=ft.Text("Vista Operativa Global de Inventario", color="white"), width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"))
+                ft.ElevatedButton(
+                    content=ft.Text("Vista Operativa Global de Inventario", color="white"), 
+                    width=350, 
+                    style=ft.ButtonStyle(bgcolor="#4DD0E1"),
+                    # on_click=lambda _: crear_vista_inventario(page, usuario, renderizar_menu_por_rol) # 👈 Enlázalo aquí cuando tengas esa vista lista
+                ), 
+                ft.ElevatedButton(
+                    content=ft.Text("Registrar Salida de Juguetes", color="white"),
+                    width=350, 
+                    on_click=lambda _: crear_vista_salidas(page, usuario, renderizar_menu_por_rol),
+                    style=ft.ButtonStyle(bgcolor="#0F4C5C")
+                ),
+                ft.ElevatedButton(
+                    content=ft.Text("Historial / Devoluciones", color="white"),
+                    width=350, 
+                    on_click=lambda _: crear_vista_historial(page, usuario, renderizar_menu_por_rol),
+                    style=ft.ButtonStyle(bgcolor="#E2711D")
+                )
             ])
 
         page.add(ft.Container(content=bloque_acciones, padding=30))
         page.update()
-
     
     formulario_login = ft.Column(
         controls=[

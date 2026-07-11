@@ -1,23 +1,5 @@
 [
     {
-        "uuid": "vdr09",
-        "nombre": "Barco Portaaviones",
-        "marca": "Fisher Price - Imaginex",
-        "material": "Plastico",
-        "alto_cm": 58.0,
-        "ancho_cm": 24.0,
-        "largo_cm": 63.0,
-        "usa_baterias": false,
-        "incluye": "1 barco portaaviones, 2 aviones, 2 muñecos aviadores, 2 chalecos removibles, 1 polea y 12 accesorios para utilizar en el portaaviones",
-        "estado_fisico": "excelente",
-        "piezas_faltantes": false,
-        "triaje_resultado": "venta",
-        "categoria": "Juguetes para varones",
-        "precio_usd": 55.00
-
-    },
-
-    {  
         "uuid": "t030",
         "nombre": "Oso Nievito",
         "marca": "n/a",
@@ -31,11 +13,9 @@
         "piezas_faltantes": false,
         "triaje_resultado": "donacion",
         "categoria": "Peluches",
-        "precio_usd": 0.00
-
+        "precio_usd": 0.0
     },
-
-     {  
+    {
         "uuid": "m044",
         "nombre": "Coche y silla de comer para muñecas",
         "marca": "n/a",
@@ -49,8 +29,22 @@
         "piezas_faltantes": true,
         "triaje_resultado": "reciclaje",
         "categoria": "n/a",
-        "precio_usd": 0.00
-
+        "precio_usd": 0.0
+    },
+    {
+        "uuid": "vdr09",
+        "nombre": "Barco Portaaviones",
+        "marca": "Fisher-Price / Imaginext",
+        "material": "Plástico",
+        "alto_cm": 58.0,
+        "ancho_cm": 24.0,
+        "largo_cm": 63.0,
+        "usa_baterias": false,
+        "incluye": "1 Barco Portaaviones, 2 Aviones, 2 Muñecos aviadores, 2 Chalecos removibles, 1 Polea y 12 accesorios.",
+        "estado_fisico": "excelente",
+        "piezas_faltantes": false,
+        "triaje_resultado": "venta",
+        "categoria": "Juguetes para niños",
+        "precio_usd": 55.0
     }
-
 ]
