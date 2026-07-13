@@ -72,20 +72,20 @@ def crear_vista_salidas(page, usuario, renderizar_menu_por_rol):
 
     btn_guardar = ft.ElevatedButton("Confirmar Salida", on_click=procesar_formulario, bgcolor="#0F4C5C", color="white")
     
-    btn_volver = ft.IconButton(
-        icon="arrow_back", 
-        tooltip="Volver al Menú",
+    btn_volver = ft.ElevatedButton(
+        content=ft.Text("Atrás", color="white"),
+        bgcolor="#0F4C5C",
         on_click=lambda _: renderizar_menu_por_rol(usuario)
     )
 
     page.controls.clear()
 
-    # Añadir todo a la vista organizada
+    # Añadir todo a la vista organizada de forma segura (Cero pantallas rosas)
     page.add(
         ft.Row([
             ft.Container(
                 content=ft.Column([
-                    ft.Row([txt_titulo, btn_volver], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                    ft.Row([txt_titulo, btn_volver], alignment="spaceBetween"), # 💡 Corregido a string
                     ft.Divider(height=10, color="transparent"),
                     dropdown_juguete,
                     dropdown_tipo,
@@ -93,11 +93,11 @@ def crear_vista_salidas(page, usuario, renderizar_menu_por_rol):
                     ft.Divider(height=10, color="transparent"),
                     btn_guardar,
                     lbl_mensaje
-                ], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                ], horizontal_alignment="center"), # 💡 Corregido a string
                 padding=30,
                 width=450 
             )
-        ], alignment=ft.MainAxisAlignment.CENTER) 
+        ], alignment="center") # 💡 Corregido a string
     )
     
     page.update()

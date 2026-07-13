@@ -3,7 +3,7 @@ import json
 from Modules.salidas import GestorSalidas
 
 def crear_vista_historial(page, usuario, renderizar_menu_por_rol):
-    txt_titulo = ft.Text("HISTORIAL DE SALIDAS Y DEVOLUCIONES", size=20, weight=ft.FontWeight.BOLD, color="#0F4C5C")
+    txt_titulo = ft.Text("HISTORIAL DE SALIDAS Y AUDITORÍA DE USUARIOS", size=20, weight=ft.FontWeight.BOLD, color="#0F4C5C")
     lbl_mensaje = ft.Text("", size=14, weight=ft.FontWeight.BOLD)
     contenedor_tabla = ft.Column(scroll=ft.ScrollMode.AUTO, expand=True)
 
@@ -16,7 +16,7 @@ def crear_vista_historial(page, usuario, renderizar_menu_por_rol):
             historico = []
 
         if not historico:
-            contenedor_tabla.controls.append(ft.Text("No hay registros de salidas en el sistema.", italic=True, color="bluegrey400"))
+            contenedor_tabla.controls.append(ft.Text("No hay registros de actividades en el sistema.", italic=True, color="bluegrey400"))
             page.update()
             return
 
@@ -25,7 +25,9 @@ def crear_vista_historial(page, usuario, renderizar_menu_por_rol):
             uuid_j = s.get("uuid_juguete", s.get("uuid"))
             nombre_j = s.get("nombre", "Sin Nombre")
             
-            # Botón dinámico configurado con 'content' para evitar errores visuales
+            # 💡 Capturamos qué usuario hizo la acción (si no viene en el JSON, muestra su Rol por defecto)
+            usuario_responsable = s.get("usuario_id", s.get("usuario", "Admin_Sistema"))
+
             btn_revertir = ft.ElevatedButton(
                 content=ft.Text("Devolver", color="white"),
                 bgcolor="#E2711D",
@@ -36,6 +38,7 @@ def crear_vista_historial(page, usuario, renderizar_menu_por_rol):
                 ft.DataRow(
                     cells=[
                         ft.DataCell(ft.Text(s.get("fecha_salida", ""))),
+                        ft.DataCell(ft.Text(usuario_responsable, weight="bold", color="bluegrey700")), # 👤 NUEVA CELDA DE USUARIO
                         ft.DataCell(ft.Text(nombre_j.upper())),
                         ft.DataCell(ft.Text(s.get("tipo_salida", "").upper())),
                         ft.DataCell(ft.Text(s.get("detalle_destino", ""))),
@@ -48,6 +51,7 @@ def crear_vista_historial(page, usuario, renderizar_menu_por_rol):
         tabla = ft.DataTable(
             columns=[
                 ft.DataColumn(ft.Text("Fecha")),
+                ft.DataColumn(ft.Text("Operador / Usuario")), # 👤 NUEVA COLUMNA VISUAL
                 ft.DataColumn(ft.Text("Juguete")),
                 ft.DataColumn(ft.Text("Tipo")),
                 ft.DataColumn(ft.Text("Destino")),
