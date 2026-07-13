@@ -20,7 +20,7 @@ def main(page: ft.Page):
     page.window_height = 760
     page.theme_mode = ft.ThemeMode.LIGHT
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment = ft.MainAxisAlignment.SPACE_BETWEEN
+    page.vertical_alignment = ft.MainAxisAlignment.START
     page.padding = 0
     page.bgcolor = "white"
 
@@ -112,10 +112,10 @@ def main(page: ft.Page):
     contenedor_enlaces = ft.Container(
         content=ft.Row(
             controls=[columna_izquierda, columna_derecha],
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         ),
-        bgcolor="#4DD0E1", 
-        padding=15, 
+        bgcolor="#4DD0E1",
+        padding=15,
         height=68
     )
 
@@ -140,58 +140,105 @@ def main(page: ft.Page):
 
         def mostrar_pantalla_catalogo(titulo_vista, tipo_catalogo):
             page.controls.clear()
-        
+
             # 1. ENCABEZADO DE LA VISTA DEL CATÁLOGO
             page.add(
                 ft.Container(
-                    content=ft.Column([
-                        ft.Row([
-                            ft.Text(titulo_vista.upper(), size=20, weight=ft.FontWeight.BOLD, color="#0F4C5C"),
-                            
-                            # Botón Atrás universal compatible
-                            ft.ElevatedButton(
-                                content=ft.Text("Atrás", color="white"),
-                                bgcolor="#0F4C5C",
-                                on_click=lambda _: renderizar_menu_por_rol(usuario)
-                            )
-                        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                    ]),
+                    content=ft.Row([
+                        ft.Text(titulo_vista.upper(), size=20, weight=ft.FontWeight.BOLD, color="#0F4C5C"),
+                        ft.ElevatedButton(
+                            content=ft.Text("Atrás", color="white"),
+                            bgcolor="#0F4C5C",
+                            on_click=lambda _: renderizar_menu_por_rol(usuario)
+                        )
+                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                     padding=20
                 ),
                 ft.Divider(height=1, color="grey300")
             )
 
-            zona_render = ft.Column(spacing=15, scroll=ft.ScrollMode.AUTO, expand=True)
-            lista_juguetes = []
-
-            # 2. CATÁLOGO COMERCIAL (CLIENTES)
-            if tipo_catalogo == "comercial":
-                lista_juguetes = gestor_catalogos.obtener_catalogo_comercial()
-                malla = ft.Row(wrap=True, spacing=15, run_spacing=15)
-                for j in lista_juguetes:
-                    malla.controls.append(ComponenteCatalogos.crear_tarjeta_comercial_social(j))
-                zona_render.controls.append(malla)
-
-            # 3. CATÁLOGO SOCIAL (FUNDACIONES)
-            elif tipo_catalogo == "social":
-                lista_juguetes = gestor_catalogos.obtener_catalogo_social()
-                malla = ft.Row(wrap=True, spacing=15, run_spacing=15)
-                for j in lista_juguetes:
-                    malla.controls.append(ComponenteCatalogos.crear_tarjeta_comercial_social(j))
-                zona_render.controls.append(malla)
-
-            # 4. CATÁLOGO DE RESIDUOS (RECICLADORAS)
-            elif tipo_catalogo == "residuos":
+            # 2. CATÁLOGO DE RESIDUOS (sin filtro, solo tabla)
+            if tipo_catalogo == "residuos":
                 lista_juguetes = gestor_catalogos.obtener_catalogo_residuos()
-                tabla = ComponenteCatalogos.crear_tabla_residuos(lista_juguetes)
-                zona_render.controls.append(ft.Row([tabla], scroll=ft.ScrollMode.AUTO))
+                zona_render = ft.Column(spacing=15, scroll=ft.ScrollMode.AUTO, expand=True)
+                if lista_juguetes:
+                    tabla = ComponenteCatalogos.crear_tabla_residuos(lista_juguetes)
+                    zona_render.controls.append(ft.Row([tabla], scroll=ft.ScrollMode.AUTO))
+                else:
+                    zona_render.controls.append(
+                        ft.Text("No hay registros en este catálogo actualmente.", italic=True, color="bluegrey400")
+                    )
+                page.add(ft.Container(content=zona_render, padding=20, expand=True))
+                page.update()
+                return
 
-            if not lista_juguetes:
-                zona_render.controls.append(
-                    ft.Text("No hay registros en este catálogo actualmente.", italic=True, color="bluegrey400")
-                )
+            # 3. CATÁLOGOS COMERCIAL Y SOCIAL: filtro de categoría + botones de acción
+            zona_render = ft.Column(spacing=15, scroll=ft.ScrollMode.AUTO, expand=True)
 
-            page.add(ft.Container(content=zona_render, padding=20, expand=True))
+            dd_categoria = ft.Dropdown(
+                label="Filtrar por Categoría",
+                width=300,
+                value="Todos",
+                options=[
+                    ft.dropdown.Option("Todos"),
+                    ft.dropdown.Option("Juguetes para niños"),
+                    ft.dropdown.Option("Juguetes para niñas"),
+                    ft.dropdown.Option("Juguetes para bebés"),
+                    ft.dropdown.Option("Peluches"),
+                    ft.dropdown.Option("Juegos de Mesa"),
+                ]
+            )
+
+            def renderizar_tarjetas(e=None):
+                if tipo_catalogo == "comercial":
+                    lista = gestor_catalogos.obtener_catalogo_comercial()
+                else:
+                    lista = gestor_catalogos.obtener_catalogo_social()
+
+                filtro = dd_categoria.value if dd_categoria.value else "Todos"
+                if filtro != "Todos":
+                    lista = [j for j in lista if str(j.categoria).strip() == filtro]
+
+                malla = ft.Row(wrap=True, spacing=15, run_spacing=15)
+                for j in lista:
+                    tarjeta = ComponenteCatalogos.crear_tarjeta_comercial_social(j)
+                    texto_boton = "Confirmar Asignación" if j.triaje_resultado == "donacion" else "Proceder al Pago"
+                    color_boton = "purple" if j.triaje_resultado == "donacion" else "orange"
+                    boton = ft.ElevatedButton(
+                        content=ft.Text(texto_boton, color="white"),
+                        bgcolor=color_boton,
+                        on_click=lambda _: crear_vista_salidas(page, usuario, renderizar_menu_por_rol)
+                    )
+                    tarjeta.content.controls.append(boton)
+                    malla.controls.append(tarjeta)
+
+                zona_render.controls.clear()
+                if lista:
+                    zona_render.controls.append(malla)
+                else:
+                    zona_render.controls.append(
+                        ft.Text("No hay registros en este catálogo actualmente.", italic=True, color="bluegrey400")
+                    )
+                zona_render.update()
+
+            btn_filtrar = ft.ElevatedButton(
+                content=ft.Text("Filtrar", color="white"),
+                bgcolor="#0F4C5C",
+                on_click=renderizar_tarjetas
+            )
+
+            page.add(
+                ft.Container(
+                    content=ft.Row(
+                        [dd_categoria, btn_filtrar],
+                        alignment=ft.MainAxisAlignment.START,
+                        spacing=10
+                    ),
+                    padding=ft.Padding(20, 8, 20, 8)
+                ),
+                ft.Container(content=zona_render, padding=20, expand=True)
+            )
+            renderizar_tarjetas()
             page.update()
 
         # Diseño del menú principal centrado
@@ -287,7 +334,30 @@ def main(page: ft.Page):
                     )
                 )
 
+        def cerrar_sesion(_):
+            txt_correo.value = ""
+            txt_contrasena.value = ""
+            lbl_mensaje_error.value = ""
+            page.controls.clear()
+            page.vertical_alignment = ft.MainAxisAlignment.START
+            page.add(diseno_pantalla_completa)
+            page.update()
+
+        btn_cerrar_sesion = ft.ElevatedButton(
+            content=ft.Text("Cerrar Sesión", color="white"),
+            width=350,
+            style=ft.ButtonStyle(bgcolor="red700"),
+            on_click=cerrar_sesion
+        )
+
         page.add(ft.Container(content=bloque_acciones, padding=30, alignment=ft.alignment.Alignment(0, 0)))
+        page.add(ft.Container(
+            content=ft.Column([
+                ft.Divider(color="grey300"),
+                btn_cerrar_sesion
+            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=10),
+            padding=ft.Padding(0, 0, 0, 20)
+        ))
         page.update()
 
         
@@ -313,21 +383,21 @@ def main(page: ft.Page):
             contenedor_enlaces,
             barra_estado
         ],
-        spacing=0
+        spacing=0,
+        horizontal_alignment=ft.CrossAxisAlignment.STRETCH
     )
 
     diseno_pantalla_completa = ft.Column(
         controls=[
-            # Quitamos el alignment="center" problemático de aquí
             ft.Container(
-                content=formulario_login, 
-                expand=True
+                content=formulario_login,
+                expand=True,
+                alignment=ft.Alignment(0, 0)
             ),
-            # El pie de página se acopla abajo con su espacio real
             bloque_pie_pagina
         ],
-        alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-        expand=True 
+        expand=True,
+        horizontal_alignment=ft.CrossAxisAlignment.STRETCH
     )
 
     page.spacing = 0

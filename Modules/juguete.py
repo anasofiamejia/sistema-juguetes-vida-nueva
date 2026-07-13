@@ -1,9 +1,9 @@
 class Juguete:
-    def __init__(self, uuid, nombre, marca, categoria, material, alto_cm, ancho_cm, largo_cm, usa_baterias, incluye, estado_fisico, piezas_faltantes, triaje_resultado, precio_usd):
+    def __init__(self, uuid, nombre, marca, categoria, material, alto_cm, ancho_cm, largo_cm, usa_baterias, incluye, estado_fisico, piezas_faltantes, triaje_resultado, precio_usd, imagen_ruta=""):
         self.uuid = uuid
         self.nombre = nombre
         self.marca = marca
-        self.categoria = categoria 
+        self.categoria = categoria
         self.material = material
         self.alto_cm = float(alto_cm)
         self.ancho_cm = float(ancho_cm)
@@ -14,6 +14,7 @@ class Juguete:
         self.piezas_faltantes = bool(piezas_faltantes)
         self.triaje_resultado = triaje_resultado  # "venta", "donacion", "reciclaje"
         self.precio_usd = float(precio_usd)
+        self.imagen_ruta = imagen_ruta
 
     @classmethod
     def desde_diccionario(cls, datos):
@@ -31,7 +32,8 @@ class Juguete:
             estado_fisico=datos.get("estado_fisico", "bueno"),
             piezas_faltantes=datos.get("piezas_faltantes", False),
             triaje_resultado=datos.get("triaje_resultado"),
-            precio_usd=datos.get("precio_usd", 0.0)
+            precio_usd=datos.get("precio_usd", 0.0),
+            imagen_ruta=datos.get("imagen_ruta", "")
         )
     
     def to_dict(self):
