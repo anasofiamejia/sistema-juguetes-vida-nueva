@@ -16,7 +16,6 @@
         "precio_usd": 0.0,
         "imagen_ruta": "coche.png"
     },
-
     {
         "uuid": "b017",
         "nombre": "Circo Lego",
@@ -34,7 +33,6 @@
         "precio_usd": 0.0,
         "imagen_ruta": "legos.png"
     },
-
     {
         "uuid": "m044",
         "nombre": "Pizarra de Ben 10",
@@ -52,25 +50,6 @@
         "precio_usd": 0.0,
         "imagen_ruta": "pizarra.png"
     },
-
-    {
-        "uuid": "t020",
-        "nombre": "Osita",
-        "marca": "n/a",
-        "categoria": "Peluches",
-        "material": "Tela/Algodón",
-        "alto_cm": 25.0,
-        "ancho_cm": 0.0,
-        "largo_cm": 0.0,
-        "usa_baterias": false,
-        "incluye": "n/a",
-        "estado_fisico": "bueno",
-        "piezas_faltantes": false,
-        "triaje_resultado": "donacion",
-        "precio_usd": 0.0,
-        "imagen_ruta": "osita.png"
-    },
-
     {
         "uuid": "j009",
         "nombre": "Tren de Madera",
@@ -88,25 +67,40 @@
         "precio_usd": 0.0,
         "imagen_ruta": "trenmadera.png"
     },
-
     {
         "uuid": "m030",
         "nombre": "Cesta de mercado",
         "marca": "n/a",
         "categoria": "Juguetes para niñas",
-        "material": "Plástico",
+        "material": "Plastico",
         "alto_cm": 13.0,
         "ancho_cm": 19.0,
         "largo_cm": 28.0,
         "usa_baterias": false,
-        "incluye": "1 cesta con 25 alimentos.",
+        "incluye": "1 cesta y 25 alimentos.",
         "estado_fisico": "bueno",
         "piezas_faltantes": false,
         "triaje_resultado": "donacion",
         "precio_usd": 0.0,
         "imagen_ruta": "mercado.png"
     },
-
+    {
+        "uuid": "t020",
+        "nombre": "Osita",
+        "marca": "n/a",
+        "categoria": "Peluches",
+        "material": "Algodón",
+        "alto_cm": 25.0,
+        "ancho_cm": 0.0,
+        "largo_cm": 0.0,
+        "usa_baterias": false,
+        "incluye": "n/a",
+        "estado_fisico": "bueno",
+        "piezas_faltantes": false,
+        "triaje_resultado": "donacion",
+        "precio_usd": 0.0,
+        "imagen_ruta": "osita.png"
+    },
     {
         "uuid": "vrr01",
         "nombre": "Pluto camina contigo",
@@ -124,25 +118,6 @@
         "precio_usd": 15.0,
         "imagen_ruta": "pluto.png"
     },
-
-    {
-        "uuid": "vdr01",
-        "nombre": "Carro Transformers",
-        "marca": "Transformers",
-        "categoria": "Juguetes para niños",
-        "material": "Plástico",
-        "alto_cm": 22.0,
-        "ancho_cm": 0.0,
-        "largo_cm": 17.0,
-        "usa_baterias": false,
-        "incluye": "n/a",
-        "estado_fisico": "excelente",
-        "piezas_faltantes": false,
-        "triaje_resultado": "venta",
-        "precio_usd": 25.0,
-        "imagen_ruta": "transformer.png"
-    },
-
     {
         "uuid": "mdr05",
         "nombre": "Princesa Anna de Frozen",
@@ -156,8 +131,45 @@
         "incluye": "n/a",
         "estado_fisico": "excelente",
         "piezas_faltantes": false,
-        "triaje_resultado": "venta",
+        "triaje_resultado": "vendido",
         "precio_usd": 30.0,
         "imagen_ruta": "princesa.png"
+    },
+    {
+        "uuid": "vdr01",
+        "nombre": "Carro Transformer",
+        "marca": "Transformer",
+        "categoria": "Juguetes para niños",
+        "material": "Plástico",
+        "alto_cm": 22.0,
+        "ancho_cm": 0.0,
+        "largo_cm": 0.0,
+        "usa_baterias": false,
+        "incluye": "n/a",
+        "estado_fisico": "excelente",
+        "piezas_faltantes": false,
+        "triaje_resultado": "venta",
+        "precio_usd": 25.0,
+        "imagen_ruta": "transformer.png"
+    },
+    {
+        "id": "-801536627569017577",
+        "nombre": "Juguete Restablecido",
+        "precio": 30.0,
+        "triaje_resultado": "venta",
+        "marca": "n/a",
+        "categoria": "Juguetes",
+        "imagen": "assets/.png",
+        "foto": "assets/.png"
+    },
+    {
+        "id": "-801536627569017577",
+        "nombre": "Juguete Restablecido",
+        "precio": 30.0,
+        "triaje_resultado": "venta",
+        "marca": "n/a",
+        "categoria": "Juguetes",
+        "imagen": "assets/.png",
+        "foto": "assets/.png"
     }
 ]

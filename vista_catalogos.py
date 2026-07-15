@@ -22,11 +22,22 @@ class ComponenteCatalogos:
 
     @staticmethod
     def crear_tarjeta_comercial_social(juguete_obj):
-        es_venta = juguete_obj.triaje_resultado == "venta"
+        # --- BLINDAJE CONTRA ERRORES 'NONETYPE' ---
+        # Si alguna propiedad viene vacía (None), la convertimos en un texto seguro
+        nombre_safe = str(getattr(juguete_obj, "nombre", "") or "Juguete sin Nombre").upper()
+        estado_safe = str(getattr(juguete_obj, "estado_fisico", "") or "Bueno").upper()
+        marca_safe = str(getattr(juguete_obj, "marca", "") or "n/a")
+        categoria_safe = str(getattr(juguete_obj, "categoria", "") or "General")
+        incluye_safe = str(getattr(juguete_obj, "incluye", "") or "n/a")
+        # ------------------------------------------
+
+        es_venta = getattr(juguete_obj, "triaje_resultado", "venta") == "venta"
         color_borde = "orange" if es_venta else "purple"
         badge_color = "orange" if es_venta else "purple"
         texto_color_titulo = "#E65100" if es_venta else "#4A148C"
-        texto_inferior = f"Precio: ${juguete_obj.precio_usd:.2f} USD" if es_venta else "Costo: Gratis ($0.00)"
+        
+        precio_val = getattr(juguete_obj, "precio_usd", 0.0) or 0.0
+        texto_inferior = f"Precio: ${precio_val:.2f} USD" if es_venta else "Costo: Gratis ($0.00)"
 
         # Obtención de la ruta ajustada al estilo de tu logo
         ruta_flet = ComponenteCatalogos.obtener_ruta_url_flet(getattr(juguete_obj, "imagen_ruta", ""))
@@ -35,14 +46,14 @@ class ComponenteCatalogos:
             content=ft.Column([
                 ft.Image(src=ruta_flet, width=350, height=180, fit="cover", border_radius=4),
                 ft.Row([
-                    ft.Text(juguete_obj.nombre.upper(), size=14, weight="bold", color=texto_color_titulo),
+                    ft.Text(nombre_safe, size=14, weight="bold", color=texto_color_titulo), # Usamos variable segura
                     ft.Container(
-                        content=ft.Text(juguete_obj.estado_fisico.upper(), size=10, color="white", weight="bold"),
+                        content=ft.Text(estado_safe, size=10, color="white", weight="bold"), # Usamos variable segura
                         bgcolor=badge_color, padding=6, border_radius=4
                     ),
                 ], alignment="spaceBetween"), 
-                ft.Text(f"Marca: {juguete_obj.marca} | Categoría: {juguete_obj.categoria}", size=12, color="bluegrey500"),
-                ft.Text(f"Incluye: {juguete_obj.incluye}", size=11, max_lines=2, overflow="ellipsis", color="bluegrey700"), 
+                ft.Text(f"Marca: {marca_safe} | Categoría: {categoria_safe}", size=12, color="bluegrey500"), # Usamos variables seguras
+                ft.Text(f"Incluye: {incluye_safe}", size=11, max_lines=2, overflow="ellipsis", color="bluegrey700"), # Usamos variable segura
                 ft.Divider(height=1, color="grey200"),
                 ft.Text(texto_inferior, size=13, weight="bold", color="bluegrey900")
             ], spacing=8),
@@ -114,7 +125,29 @@ def abrir_pantalla_catalogo(page, usuario, volver_menu_fn, tipo_catalogo_solicit
         except Exception:
             datos_raw = []
 
-        lista_juguetes = [Juguete.desde_diccionario(item) for item in datos_raw]
+        # 1. FILTRO ULTRA ESTRICTO: Solo pasan juguetes con nombre real y precio válido
+        lista_juguetes = []
+        for item in datos_raw:
+            if not item:
+                continue
+                
+            nombre = item.get("nombre")
+            precio = item.get("precio") or item.get("precio_usd") or 0.0
+            
+            # Si el nombre está vacío, es nulo o contiene texto basura de errores previos, lo ignoramos
+            if nombre is None or str(nombre).strip() == "" or "NONE" in str(nombre).upper() or "SIN NOMBRE" in str(nombre).upper():
+                continue
+                
+            if float(precio) <= 0.0:
+                continue
+                
+            # Si pasó los filtros, lo convertimos de forma segura en objeto
+            lista_juguetes.append(Juguete.desde_diccionario(item))
+
+        # Limpiamos los controles internos de la cuadrícula para evitar duplicados residuales
+        grid_articulos.controls.clear() 
+
+        # 3. CONTINUACIÓN DE TU LÓGICA DE ROLES Y RENDERIZADO DE TARJETAS
         rol_usuario_raw = getattr(usuario, "rol", "invitado") if not isinstance(usuario, dict) else usuario.get("rol", "invitado")
         rol_usuario = str(rol_usuario_raw).strip().lower()
 
@@ -155,6 +188,11 @@ def abrir_pantalla_catalogo(page, usuario, volver_menu_fn, tipo_catalogo_solicit
                 grid_articulos.controls.append(tarjeta_visual)
 
         fila_filtro = ft.Row([dd_categorias], alignment="center") if not es_reciclaje else ft.Container()
+
+        # =========================================================================
+        # ¡¡EL CAMBIO CLAVE AQUÍ!! Borrar las cuadrículas viejas acumuladas del layout
+        # =========================================================================
+        layout_principal.controls.clear() 
 
         layout_principal.controls = [
             ft.Row([

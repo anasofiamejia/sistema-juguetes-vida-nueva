@@ -2,6 +2,8 @@ import json
 import flet as ft
 from Modules.usuarios import SistemaUsuarios
 from Modules.persistencia import AdministradorPersistencia
+from extension_carrito import inyectar_carrito_desde_afuera
+
 
 from Modules.catalogos import GestorCatalogos
 from vista_catalogos import ComponenteCatalogos
@@ -268,61 +270,62 @@ def main(page: ft.Page):
         # CONTROL DE ACCIONES POR ROL (Utilizando 'content' y 'style' tradicionales)
         if usuario.rol == "Familia":
             bloque_acciones.controls.extend([
-                ft.ElevatedButton(
-                    content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="orange"),
-                    on_click=lambda _: mostrar_pantalla_catalogo("Catálogo Comercial", "comercial")
-                ),
-                ft.ElevatedButton(
-                    content=ft.Text("Registrar una nueva Donación (Donar)", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="purple"),
-                    on_click=lambda _: abrir_info_donacion(page)
-                )
-            ])
+            ft.ElevatedButton(
+                content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
+                width=350, style=ft.ButtonStyle(bgcolor="orange"),
+                on_click=lambda _: [
+                    mostrar_pantalla_catalogo("Catálogo Comercial", "comercial"),
+                    inyectar_carrito_desde_afuera(page, usuario)
+                ]
+            ),
+            ft.ElevatedButton(
+                content=ft.Text("Registrar una nueva Donación (Donar)", color="white"), 
+                width=350, style=ft.ButtonStyle(bgcolor="purple"),
+                on_click=lambda _: abrir_info_donacion(page)
+            )
+        ])
         elif usuario.rol == "Fundación":
             bloque_acciones.controls.extend([
-                ft.ElevatedButton(
-                    content=ft.Text("Ver Artículos para Donación (Gratuitos)", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="purple"),
-                    on_click=lambda _: mostrar_pantalla_catalogo("Artículos para Donación", "social")
-                ),
-                ft.ElevatedButton(
-                    content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="orange"),
-                    on_click=lambda _: mostrar_pantalla_catalogo("Catálogo Comercial", "comercial")
-                )
-            ])
-        elif usuario.rol == "Centro_Reciclaje":
-            bloque_acciones.controls.extend([
-                ft.ElevatedButton(
-                    content=ft.Text("Ver Inventario de Residuos", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="green"),
-                    on_click=lambda _: mostrar_pantalla_catalogo("Inventario de Residuos", "residuos")
-                )
-            ])
+            ft.ElevatedButton(
+                content=ft.Text("Ver Artículos para Donación (Gratuitos)", color="white"), 
+                width=350, style=ft.ButtonStyle(bgcolor="purple"),
+                on_click=lambda _: [
+                    mostrar_pantalla_catalogo("Artículos para Donación", "social"),
+                    inyectar_carrito_desde_afuera(page, usuario)
+                ]
+            ),
+            ft.ElevatedButton(
+                content=ft.Text("Ver Catálogo Comercial (Comprar)", color="white"), 
+                width=350, style=ft.ButtonStyle(bgcolor="orange"),
+                on_click=lambda _: [
+                    mostrar_pantalla_catalogo("Catálogo Comercial", "comercial"),
+                    inyectar_carrito_desde_afuera(page, usuario)
+                ]
+            )
+        ])
         elif usuario.rol in ["Administrador", "Operario"]:
             bloque_acciones.controls.extend([
-                ft.ElevatedButton(
-                    content=ft.Text("Vista Operativa Global de Inventario", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"),
-                    on_click=lambda _: cargar_pantalla_tecnica(page, usuario, renderizar_menu_por_rol)
-                ), 
-                ft.ElevatedButton(
-                    content=ft.Text("Registrar e Ingresar Juguete", color="white"), 
-                    width=350, style=ft.ButtonStyle(bgcolor="#26A69A"),
-                    on_click=lambda _: abrir_formulario_ingreso(page, usuario, renderizar_menu_por_rol)
-                ), 
-                ft.ElevatedButton(
-                    content=ft.Text("Registrar Salida de Juguetes", color="white"),
-                    width=350, style=ft.ButtonStyle(bgcolor="#0F4C5C"),
-                    on_click=lambda _: crear_vista_salidas(page, usuario, renderizar_menu_por_rol)
-                ),
-                ft.ElevatedButton(
-                    content=ft.Text("Historial / Devoluciones", color="white"),
-                    width=350, style=ft.ButtonStyle(bgcolor="#E2711D"),
-                    on_click=lambda _: crear_vista_historial(page, usuario, renderizar_menu_por_rol)
-                ),
-            ])
+            ft.ElevatedButton(
+                content=ft.Text("Vista Operativa Global de Inventario", color="white"), 
+                width=350, style=ft.ButtonStyle(bgcolor="#4DD0E1"),
+                on_click=lambda _: cargar_pantalla_tecnica(page, usuario, renderizar_menu_por_rol)
+            ), 
+            ft.ElevatedButton(
+                content=ft.Text("Registrar e Ingresar Juguete", color="white"), 
+                width=350, style=ft.ButtonStyle(bgcolor="#26A69A"),
+                on_click=lambda _: abrir_formulario_ingreso(page, usuario, renderizar_menu_por_rol)
+            ), 
+            ft.ElevatedButton(
+                content=ft.Text("Registrar Salida de Juguetes", color="white"),
+                width=350, style=ft.ButtonStyle(bgcolor="#0F4C5C"),
+                on_click=lambda _: crear_vista_salidas(page, usuario, renderizar_menu_por_rol)
+            ),
+            ft.ElevatedButton(
+                content=ft.Text("Historial / Devoluciones", color="white"),
+                width=350, style=ft.ButtonStyle(bgcolor="#E2711D"),
+                on_click=lambda _: crear_vista_historial(page, usuario, renderizar_menu_por_rol)
+            ),
+        ])
             
             if usuario.rol == "Administrador":
                 bloque_acciones.controls.append(

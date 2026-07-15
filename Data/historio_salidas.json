@@ -1,0 +1,578 @@
+[
+    {
+        "fecha": "2026-07-13 15:26:16",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Fisher-Price / Disney | Categoría: Juguetes para bebés",
+        "tipo": "venta",
+        "monto": 15.0
+    },
+    {
+        "fecha": "2026-07-13 15:26:16",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Transformers | Categoría: Juguetes para niños",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 15:26:16",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Disney | Categoría: Juguetes para niñas",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 15:36:38",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Disney | Categoría: Juguetes para niñas",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 15:36:38",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Transformers | Categoría: Juguetes para niños",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 15:44:07",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Disney | Categoría: Juguetes para niñas",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 15:44:07",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Transformers | Categoría: Juguetes para niños",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 15:44:07",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Fisher-Price / Disney | Categoría: Juguetes para bebés",
+        "tipo": "venta",
+        "monto": 15.0
+    },
+    {
+        "fecha": "2026-07-13 15:49:48",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Juguete",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 15:51:59",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Transformers | Categoría: Juguetes para niños",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 15:51:59",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Disney | Categoría: Juguetes para niñas",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 15:56:15",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Transformers | Categoría: Juguetes para niños",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 15:56:15",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Disney | Categoría: Juguetes para niñas",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:02:08",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Transformers | Categoría: Juguetes para niños",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:02:08",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "Marca: Disney | Categoría: Juguetes para niñas",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:14:02",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:21",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:21",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:22",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:22",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:22",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:22",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:23",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:23",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:23",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:23",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:23",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:23",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:24",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:24",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:25",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:19:25",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:09",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:09",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:10",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:10",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:10",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:10",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:11",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:11",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:12",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:22:12",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:25:50",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:25:50",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PLUTO CAMINA CONTIGO",
+        "tipo": "venta",
+        "monto": 15.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:43",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:43",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:45",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:45",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:46",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:46",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:47",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:47",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:47",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:47",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:48",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:28:48",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:31:16",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:31:16",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:31:17",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:31:17",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:31:17",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:31:17",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:33:29",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:33:29",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PLUTO CAMINA CONTIGO",
+        "tipo": "venta",
+        "monto": 15.0
+    },
+    {
+        "fecha": "2026-07-13 16:33:30",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:33:30",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PLUTO CAMINA CONTIGO",
+        "tipo": "venta",
+        "monto": 15.0
+    },
+    {
+        "fecha": "2026-07-13 16:39:59",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:39:59",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:40:00",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    },
+    {
+        "fecha": "2026-07-13 16:40:00",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:43:51",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "PRINCESA ANNA DE FROZEN",
+        "tipo": "venta",
+        "monto": 30.0
+    },
+    {
+        "fecha": "2026-07-13 16:43:51",
+        "usuario": "Ana Gómez",
+        "rol": "Familia",
+        "juguete": "CARRO TRANSFORMERS",
+        "tipo": "venta",
+        "monto": 25.0
+    }
+]
