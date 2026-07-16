@@ -123,60 +123,15 @@ def mostrar_checkout_personalizado(page, usuario, renderizar_menu_por_rol=None):
             with open(historial_path, "w", encoding="utf-8") as f:
                 json.dump(historico, f, indent=4, ensure_ascii=False)
 
-            # --- 2. REGISTRAR LA TRANSACCIÓN COMPATIBLE CON TU PANEL ADMIN ---
-            historial_path = "Data/historico_salidas.json"
-            historico = []
-            if os.path.exists(historial_path):
-                with open(historial_path, "r", encoding="utf-8") as f:
-                    try:
-                        historico = json.load(f)
-                    except:
-                        historico = []
-
-            # Capturar los datos del usuario en sesión
-            nombre_usr = "Usuario"
-            if usuario:
-                if isinstance(usuario, dict):
-                    nombre_usr = usuario.get("nombre", "Usuario")
-                else:
-                    nombre_usr = getattr(usuario, "nombre", "Usuario")
-
-            for item in items_a_procesar:
-                uuid_juguete = item.get("id", f"GEN-{int(datetime.datetime.now().timestamp())}")
-                
-                # Estructura exacta que pide tu función crear_vista_historial
-                historico.append({
-                    "uuid_juguete": uuid_juguete,
-                    "fecha_salida": fecha_actual,
-                    "usuario_id": nombre_usr,
-                    "nombre": item["nombre"],
-                    "tipo_salida": "Venta" if item["tipo"] == "venta" else "Donación",
-                    "detalle_destino": "Cliente Online",
-                    "precio_final": float(item["precio"]),
-                    "datos_completos": item  # Guardamos todo el objeto para poder recrearlo al devolver
-                })
-
-            os.makedirs(os.path.dirname(historial_path), exist_ok=True)
-            with open(historial_path, "w", encoding="utf-8") as f:
-                json.dump(historico, f, indent=4, ensure_ascii=False)
-
-            resumen_texto =  "=========================================\n"
-            resumen_texto += "         COMPROBANTE DE TRANSACCIÓN      \n"
-            resumen_texto += f" Fecha/Hora: {fecha_actual}\n"
-            resumen_texto += "=========================================\n\n"
-            
-            for item in items_a_procesar:
-                resumen_texto += f" • {str(item['nombre']).upper()} - ${item['precio']} USD\n"
-            
             # --- 3. MOSTRAR COMPROBANTE EN PANTALLA ---
             resumen_texto =  "=========================================\n"
             resumen_texto += "         COMPROBANTE DE TRANSACCIÓN      \n"
             resumen_texto += f" Fecha/Hora: {fecha_actual}\n"
             resumen_texto += "=========================================\n\n"
-            
+
             for item in items_a_procesar:
                 resumen_texto += f" • {str(item['nombre']).upper()} - ${item['precio']} USD\n"
-            
+
             resumen_texto += "-----------------------------------------\n"
             resumen_texto += f" TOTAL PROCESADO: ${CarritoGlobal.obtener_total():.2f} USD\n"
             resumen_texto += "=========================================\n"

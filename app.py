@@ -135,7 +135,9 @@ def main(page: ft.Page):
     # Lógica de Menús y Cátalogos:
 
     def renderizar_menu_por_rol(usuario):
-        page.controls.clear() 
+        while len(page.views) > 1:
+            page.views.pop()
+        page.controls.clear()
         page.vertical_alignment = ft.MainAxisAlignment.START
         
         gestor_catalogos = GestorCatalogos(gestor_datos)
@@ -451,24 +453,30 @@ def cargar_pantalla_tecnica(page, usuario, volver_menu_fn):
     page.update()
 
 def abrir_info_donacion(page):
-    
+
+    def cerrar_info(_):
+        dialogo.open = False
+        if dialogo in page.overlay:
+            page.overlay.remove(dialogo)
+        page.update()
+
     dialogo = ft.AlertDialog(
         title=ft.Text("¿Cómo donar un juguete?"),
-        content=ft.Text( 
+        content=ft.Text(
             "¡Gracias por contribuir con la economía circular! "
             "Para garantizar la calidad de nuestro servicio, recibimos los juguetes físicamente "
             "en nuestra tienda de lunes a viernes (9:00 AM a 5:00 PM).\n\n"
             "Nuestro equipo se encargará de realizar la evaluación de cada juguete. ¡Te esperamos!",
             size=14
         ),
-        actions=[ft.TextButton("Entendido", on_click=lambda _: setattr(dialogo, "open", False) or page.update())]
+        actions=[ft.TextButton("Entendido", on_click=cerrar_info)]
     )
     page.overlay.append(dialogo)
     dialogo.open = True
     page.update()
 
 
-def abrir_formulario_ingreso(page, actualizar_tabla_fn, e=None):
+def abrir_formulario_ingreso(page, usuario, volver_fn=None):
     # Campos de texto y selectores según tu estructura exacta de datos
     txt_nombre = ft.TextField(label="Nombre del Juguete", width=300)
     txt_marca = ft.TextField(label="Marca (ej. Mattel, Hasbro o n/a)", width=300, value="n/a")
@@ -554,10 +562,11 @@ def abrir_formulario_ingreso(page, actualizar_tabla_fn, e=None):
         with open(ruta_json, "w", encoding="utf-8") as f:
             json.dump(inventario, f, indent=4, ensure_ascii=False)
 
-        # Cerrar modal y refrescar la tabla de la interfaz
         dlg_formulario.open = False
+        if dlg_formulario in page.overlay:
+            page.overlay.remove(dlg_formulario)
+        page.snack_bar = ft.SnackBar(ft.Text(f"'{txt_nombre.value}' ingresado al inventario exitosamente."), open=True)
         page.update()
-        actualizar_tabla_fn()
 
     # Estructura visual del Modal (Pop-up) organizada en scroll
     dlg_formulario = ft.AlertDialog(
@@ -577,7 +586,11 @@ def abrir_formulario_ingreso(page, actualizar_tabla_fn, e=None):
             width=340, height=500
         ),
         actions=[
-            ft.TextButton("Cancelar", on_click=lambda _: setattr(dlg_formulario, "open", False) or page.update()),
+            ft.TextButton("Cancelar", on_click=lambda _: [
+                setattr(dlg_formulario, "open", False),
+                page.overlay.remove(dlg_formulario) if dlg_formulario in page.overlay else None,
+                page.update()
+            ]),
             ft.ElevatedButton("Guardar e Ingresar", bgcolor="#0F4C5C", color="white", on_click=guardar_juguete_click)
         ]
     )
