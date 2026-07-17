@@ -66,6 +66,10 @@ def mostrar_checkout_personalizado(page, usuario, renderizar_menu_por_rol=None):
             page.update()
             return
 
+        btn_confirmar.disabled = True
+        btn_confirmar.visible = False
+        page.update()
+
         try:
             fecha_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             items_a_procesar = list(CarritoGlobal.items)

@@ -131,7 +131,7 @@
         "incluye": "n/a",
         "estado_fisico": "excelente",
         "piezas_faltantes": false,
-        "triaje_resultado": "vendido",
+        "triaje_resultado": "venta",
         "precio_usd": 30.0,
         "imagen_ruta": "princesa.png"
     },
@@ -151,25 +151,5 @@
         "triaje_resultado": "venta",
         "precio_usd": 25.0,
         "imagen_ruta": "transformer.png"
-    },
-    {
-        "id": "-801536627569017577",
-        "nombre": "Juguete Restablecido",
-        "precio": 30.0,
-        "triaje_resultado": "venta",
-        "marca": "n/a",
-        "categoria": "Juguetes",
-        "imagen": "assets/.png",
-        "foto": "assets/.png"
-    },
-    {
-        "id": "-801536627569017577",
-        "nombre": "Juguete Restablecido",
-        "precio": 30.0,
-        "triaje_resultado": "venta",
-        "marca": "n/a",
-        "categoria": "Juguetes",
-        "imagen": "assets/.png",
-        "foto": "assets/.png"
     }
 ]
